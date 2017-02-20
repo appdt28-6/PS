@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppDTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CUSTOMER">
+    <Key>
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+    <Property Name="cust_mail" Type="varchar" MaxLength="50" />
+    <Property Name="cust_dir" Type="varchar(max)" />
+    <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="cust_km" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="INSTRUCTOR">
+    <Key>
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="inst_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="inst_phone" Type="varchar" MaxLength="10" />
+    <Property Name="inst_mail" Type="varchar" MaxLength="50" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NOVISITA">
+    <Key>
+      <PropertyRef Name="novi_id" />
+      <PropertyRef Name="vist_id" />
+      <PropertyRef Name="inst_id" />
+    </Key>
+    <Property Name="novi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="vist_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="novi_date" Type="varchar" MaxLength="15" />
+    <Property Name="novi_hora" Type="varchar" MaxLength="15" />
+    <Property Name="novi_reason" Type="varchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="USUARIO">
+    <Key>
+      <PropertyRef Name="Usua_Id" />
+    </Key>
+    <Property Name="Usua_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usua_nombre" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Usua_Telefono" Type="varchar" MaxLength="150" />
+    <Property Name="Usua_Email" Type="varchar" MaxLength="100" />
+    <Property Name="Usua_Login" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Usua_Password" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Usua_Activo" Type="nchar" MaxLength="10" />
+    <Property Name="Usua_FechaCreacion" Type="datetime" />
+  </EntityType>
+  <EntityType Name="VISITA_ASSIGN">
+    <Key>
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="cust_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="visi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="visi_date" Type="varchar" MaxLength="50" />
+    <Property Name="visi_op" Type="int" />
+    <Property Name="visi_status" Type="int" />
+    <Property Name="visi_hora" Type="varchar" MaxLength="50" />
+    <Property Name="visi_km" Type="int" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VISITA_REGISTRO">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="reg_date" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+    <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+    <Property Name="reg_end" Type="varchar" MaxLength="50" />
+    <Property Name="reg_status" Type="int" />
+    <Property Name="reg_emo" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_Assigned_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_Assigned_Visit">
+    <Key>
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="visi_date" Type="varchar" MaxLength="101" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+    <Property Name="cust_dir" Type="varchar(max)" />
+    <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="visi_op" Type="int" />
+    <Property Name="visi_status" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_CUSTOMER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_VISITA_CUSTOMER">
+    <Key>
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="visi_date" Type="varchar" MaxLength="101" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+    <Property Name="cust_mail" Type="varchar" MaxLength="50" />
+    <Property Name="cust_dir" Type="varchar(max)" />
+    <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+    <Property Name="visi_status" Type="int" />
+    <Property Name="prioridad" Type="int" />
+    <Property Name="visi_km" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_NOTVISIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_VISITA_NOTVISIT">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" Nullable="false" />
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+    <Property Name="reg_end" Type="varchar" MaxLength="50" />
+    <Property Name="reg_status" Type="int" />
+    <Property Name="novi_reason" Type="varchar" MaxLength="200" />
+    <Property Name="reg_date" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_VISITA_REGISTRO">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" Nullable="false" />
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="reg_date" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+    <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+    <Property Name="reg_end" Type="varchar" MaxLength="50" />
+    <Property Name="reg_status" Type="int" />
+    <Property Name="visi_km" Type="int" />
+  </EntityType>
+  <EntityContainer Name="AppDTModelStoreContainer">
+    <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INSTRUCTOR" EntityType="Self.INSTRUCTOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NOVISITA" EntityType="Self.NOVISITA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VISITA_ASSIGN" EntityType="Self.VISITA_ASSIGN" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VISITA_REGISTRO" EntityType="Self.VISITA_REGISTRO" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="vis_Assigned_Visit" EntityType="Self.vis_Assigned_Visit" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_Assigned_Visit].[visi_id] AS [visi_id], 
+[vis_Assigned_Visit].[inst_id] AS [inst_id], 
+[vis_Assigned_Visit].[inst_name] AS [inst_name], 
+[vis_Assigned_Visit].[visi_date] AS [visi_date], 
+[vis_Assigned_Visit].[cust_id] AS [cust_id], 
+[vis_Assigned_Visit].[cust_name] AS [cust_name], 
+[vis_Assigned_Visit].[cust_phone] AS [cust_phone], 
+[vis_Assigned_Visit].[cust_dir] AS [cust_dir], 
+[vis_Assigned_Visit].[cust_longitud] AS [cust_longitud], 
+[vis_Assigned_Visit].[cust_latitud] AS [cust_latitud], 
+[vis_Assigned_Visit].[visi_op] AS [visi_op], 
+[vis_Assigned_Visit].[visi_status] AS [visi_status]
+FROM [dbo].[vis_Assigned_Visit] AS [vis_Assigned_Visit]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_VISITA_CUSTOMER" EntityType="Self.vis_VISITA_CUSTOMER" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_VISITA_CUSTOMER].[visi_id] AS [visi_id], 
+[vis_VISITA_CUSTOMER].[inst_id] AS [inst_id], 
+[vis_VISITA_CUSTOMER].[visi_date] AS [visi_date], 
+[vis_VISITA_CUSTOMER].[cust_id] AS [cust_id], 
+[vis_VISITA_CUSTOMER].[cust_name] AS [cust_name], 
+[vis_VISITA_CUSTOMER].[cust_phone] AS [cust_phone], 
+[vis_VISITA_CUSTOMER].[cust_mail] AS [cust_mail], 
+[vis_VISITA_CUSTOMER].[cust_dir] AS [cust_dir], 
+[vis_VISITA_CUSTOMER].[cust_longitud] AS [cust_longitud], 
+[vis_VISITA_CUSTOMER].[cust_latitud] AS [cust_latitud], 
+[vis_VISITA_CUSTOMER].[visi_status] AS [visi_status], 
+[vis_VISITA_CUSTOMER].[prioridad] AS [prioridad], 
+[vis_VISITA_CUSTOMER].[visi_km] AS [visi_km]
+FROM [dbo].[vis_VISITA_CUSTOMER] AS [vis_VISITA_CUSTOMER]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_VISITA_NOTVISIT" EntityType="Self.vis_VISITA_NOTVISIT" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_VISITA_NOTVISIT].[reg_id] AS [reg_id], 
+[vis_VISITA_NOTVISIT].[visi_id] AS [visi_id], 
+[vis_VISITA_NOTVISIT].[inst_id] AS [inst_id], 
+[vis_VISITA_NOTVISIT].[inst_name] AS [inst_name], 
+[vis_VISITA_NOTVISIT].[cust_id] AS [cust_id], 
+[vis_VISITA_NOTVISIT].[cust_name] AS [cust_name], 
+[vis_VISITA_NOTVISIT].[reg_ini] AS [reg_ini], 
+[vis_VISITA_NOTVISIT].[reg_end] AS [reg_end], 
+[vis_VISITA_NOTVISIT].[reg_status] AS [reg_status], 
+[vis_VISITA_NOTVISIT].[novi_reason] AS [novi_reason], 
+[vis_VISITA_NOTVISIT].[reg_date] AS [reg_date]
+FROM [dbo].[vis_VISITA_NOTVISIT] AS [vis_VISITA_NOTVISIT]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_VISITA_REGISTRO" EntityType="Self.vis_VISITA_REGISTRO" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO].[cust_id] AS [cust_id], 
+[vis_VISITA_REGISTRO].[cust_name] AS [cust_name], 
+[vis_VISITA_REGISTRO].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO].[reg_status] AS [reg_status], 
+[vis_VISITA_REGISTRO].[visi_km] AS [visi_km]
+FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,32 @@
+﻿
+@(Html.Kendo().Grid<PSAppWeb.Models.USUARIO>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Usua_Id).Hidden();
+          columns.Bound(c => c.Usua_nombre).Title("Nombre");
+          columns.Bound(c => c.Usua_Telefono).Title("Telefono");
+          columns.Bound(c => c.Usua_Email).Title("Email");
+          columns.Bound(c => c.Usua_Login).Title("Usario"); ;
+          columns.Bound(c => c.Usua_Password).Title("Contraseña").Format("***");
+          columns.Bound(c => c.Usua_Activo).Title("Activo"); ;
+          columns.Bound(c => c.Usua_FechaCreacion).Title("Fecha de alta"); ;
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+          toolbar.Create();
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.Usua_Id))
+          .Read(read => read.Action("USUARIO_Read", "Usuarios"))
+          .Create(create => create.Action("USUARIO_Create", "Usuarios"))
+          .Update(update => update.Action("USUARIO_Update", "Usuarios"))
+          .Destroy(destroy => destroy.Action("USUARIO_Destroy", "Usuarios"))
+      )
+)

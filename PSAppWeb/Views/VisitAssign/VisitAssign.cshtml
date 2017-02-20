@@ -1,0 +1,199 @@
+﻿@{
+    ViewBag.Title = "Asignación de Visitas";
+}
+<!-- or when using the Kendo UI CDN -->
+<script src="http://kendo.cdn.telerik.com/2016.2.607/js/jquery.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2016.2.607/js/kendo.all.min.js"></script>
+<script src="http://kendo.cdn.telerik.com/2016.2.607/js/cultures/kendo.culture.es-ES.min.js"></script>
+<div class="banner">
+    <h2>
+        <a href="#">Asignación de Visitas</a>
+    </h2>
+</div>
+
+<div class="blank">
+    <div class="blank-page">
+        <div class="panel panel-widget forms-panel">
+            <div class="forms">
+                <div class="inline-form widget-shadow">
+                    <div class="form-title">
+                        <h4>Asignación de Ruta :@DateTime.Now</h4>
+                    </div>
+                    <div class="form-body">
+                        <div data-example-id="simple-form-inline">
+                            <div class="form-group">
+                                @(Html.Kendo().DropDownList()
+             .Name("cust_id")
+             .HtmlAttributes(new { style = "width:600px" })
+            .OptionLabel("Visita a...")
+             .DataTextField("cust_name")
+             .DataValueField("cust_id")
+             .DataSource(source =>
+             {
+                 source.Read(read =>
+                 {
+                     read.Action("GetCustomer", "VisitAssign");
+                 });
+             })
+
+                                )
+                            </div>
+                            <div class="form-group">
+                                @(Html.Kendo().DropDownList()
+          .Name("inst_id")
+          .OptionLabel("Lo Visitara...")
+          .DataTextField("inst_name")
+          .DataValueField("inst_id")
+          .DataSource(source =>
+          {
+              source.Read(read =>
+              {
+                  read.Action("GetInstaller", "VisitAssign");
+              });
+          })
+          .HtmlAttributes(new { style = "width: 600px" })
+                                )
+                            </div>
+                            <div class="form-group">
+                                @(Html.Kendo().DateTimePicker()
+        .Name("datetimepicker")
+        .Value(DateTime.Now).Format("yyyy-MM-dd HH:00")
+
+        .HtmlAttributes(new { style = "width:600px;" })
+                                )
+                            </div>
+                            <div class="form-group">
+                                @(Html.Kendo().DropDownList()
+          .Name("visi_op")
+          .DataTextField("Text")
+          .DataValueField("Value")
+          .BindTo(new List<SelectListItem>() {
+              new SelectListItem() {
+                  Text = "Baja",
+                  Value = "0"
+              },
+              new SelectListItem() {
+                  Text = "Alta",
+                  Value = "1"
+              }
+          })
+          .HtmlAttributes(new { style = "width: 200px" })
+                                )
+                            </div>
+                            <button type="button" id="Save" name="Save" class="btn btn-default w3ls-button">Asignar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @(Html.Kendo().Grid<PSAppWeb.Models.vis_Assigned_Visit>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.visi_id).Hidden();
+          columns.Bound(c => c.visi_status).Hidden();
+          columns.Bound(c => c.cust_id).Hidden();
+          columns.Bound(c => c.cust_name).Title("Cliente");
+          columns.Bound(c => c.inst_id).Hidden();
+          columns.Bound(c => c.inst_name).Title("Instalador").EditorTemplateName("_installer");
+          columns.Bound(c => c.visi_date).Title("Fecha").EditorTemplateName("DateTime");
+          columns.Bound(c => c.visi_op).Title("Prioridad").EditorTemplateName("_Prioridad").ClientTemplate("#if(visi_op==0){#Baja#}else{#Alta#}#"); ;
+          // columns.Bound(c => c.visi_id).ClientTemplate("<input type='button' class='k-button'onclick=\"getDetails('#=visi_id#')\" value='Detalles' />")
+          //  .Title("");
+          columns.Command(command => { /*command.Edit().Text("Editar");*/ command.Destroy().Text("Eliminar"); }).Width(180);
+      })
+      .ToolBar(toolbar =>
+      {
+          //toolbar.Create();
+          toolbar.Excel().Text("Excel");
+          toolbar.Pdf().Text("PDF");
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine).DisplayDeleteConfirmation("¿Seguro que quiere eliminar este visita?"))
+      .Pageable(pager => pager
+    .Messages(messages => messages
+    .Display("{0} a {1}. Total de: {2}")
+    .Empty("Sin registros")))
+      .Filterable(f => f
+            .Messages(m => m
+                .Info("Mostrar registros con:")
+                .Filter("Filtrar")
+                .Clear("Limpiar")
+                .IsTrue("y verdadero")
+                .IsFalse("y falso")
+                .And("y")
+                .Or("o")
+            )
+            .Operators(o => o
+                .ForString(fs => fs
+                    .Contains("contiene")
+                    .DoesNotContain("no contiene")
+                    .EndsWith("termina con")
+                    .IsEqualTo("es igual a")
+                    .IsNotEqualTo("no es igual a")
+                    .StartsWith("empieza con")
+                )
+                .ForNumber(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+                .ForDate(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+            )
+        )
+      .Scrollable()
+
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.visi_id))
+          .Read(read => read.Action("VISITA_ASSIGN_Read", "VisitAssign"))
+          //.Create(create => create.Action("VISITA_ASSIGN_Create", "AssignRoute"))
+          //.Update(update => update.Action("VISITA_ASSIGN_Update", "AssignRoute"))
+          .Destroy(destroy => destroy.Action("VISITA_ASSIGN_Destroy", "AssignRoute"))
+      ).HtmlAttributes(new { style = "height: 480px" })
+        )
+
+    </div>
+</div>
+
+
+<script>
+        $('#Save').click(function () {
+
+            var cliente = $('#cust_id').val();
+            var instalador = $('#inst_id').val();
+            var prioridad = $('#visi_op').val();
+            var datepicker = document.getElementById("datetimepicker").value;
+            $.ajax({
+                type: "POST",
+                data: { Cust: cliente, Inst: instalador, Prio: prioridad, Fecha: datepicker },
+                url: '@Url.Action("SetVisita", "VisitAssign")',
+                dataType: 'json',
+                success: function (result) {
+                $("#grid").data("kendoGrid").dataSource.read();
+                $('#grid').data('kendoGrid').refresh();
+                   alert("Activo Asignado con exito.")
+                },
+                error: function (result) {
+                    alert("error!");  //
+                }
+
+            });
+
+        })
+</script>
+
+<script type="text/javascript">
+     //set current to the "en-GB" culture script
+     kendo.culture("es-ES");
+</script>

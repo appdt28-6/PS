@@ -1,0 +1,29 @@
+﻿
+@(Html.Kendo().Grid<PSAppWeb.Models.INSTRUCTOR>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.inst_id).Hidden();
+          columns.Bound(c => c.user_id).Hidden();
+          columns.Bound(c => c.inst_name).Title("Nombre");
+          columns.Bound(c => c.inst_phone).Title("Telefono"); ;
+          columns.Bound(c => c.inst_mail).Title("Email");
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+          toolbar.Create();
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.inst_id))
+          .Read(read => read.Action("INSTRUCTOR_Read", "Instructor"))
+          .Create(create => create.Action("INSTRUCTOR_Create", "Instructor"))
+          .Update(update => update.Action("INSTRUCTOR_Update", "Instructor"))
+          .Destroy(destroy => destroy.Action("INSTRUCTOR_Destroy", "Instructor"))
+      )
+)

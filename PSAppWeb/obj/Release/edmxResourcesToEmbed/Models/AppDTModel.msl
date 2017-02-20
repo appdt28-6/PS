@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppDTModelStoreContainer" CdmEntityContainer="AppDTEntities">
+    <EntitySetMapping Name="USUARIO">
+      <EntityTypeMapping TypeName="AppDTModel.USUARIO">
+        <MappingFragment StoreEntitySet="USUARIO">
+          <ScalarProperty Name="Usua_Id" ColumnName="Usua_Id" />
+          <ScalarProperty Name="Usua_nombre" ColumnName="Usua_nombre" />
+          <ScalarProperty Name="Usua_Telefono" ColumnName="Usua_Telefono" />
+          <ScalarProperty Name="Usua_Email" ColumnName="Usua_Email" />
+          <ScalarProperty Name="Usua_Login" ColumnName="Usua_Login" />
+          <ScalarProperty Name="Usua_Password" ColumnName="Usua_Password" />
+          <ScalarProperty Name="Usua_Activo" ColumnName="Usua_Activo" />
+          <ScalarProperty Name="Usua_FechaCreacion" ColumnName="Usua_FechaCreacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NOVISITA">
+      <EntityTypeMapping TypeName="AppDTModel.NOVISITA">
+        <MappingFragment StoreEntitySet="NOVISITA">
+          <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
+          <ScalarProperty Name="novi_hora" ColumnName="novi_hora" />
+          <ScalarProperty Name="novi_date" ColumnName="novi_date" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="vist_id" ColumnName="vist_id" />
+          <ScalarProperty Name="novi_id" ColumnName="novi_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VISITA_REGISTRO">
+      <EntityTypeMapping TypeName="AppDTModel.VISITA_REGISTRO">
+        <MappingFragment StoreEntitySet="VISITA_REGISTRO">
+          <ScalarProperty Name="reg_emo" ColumnName="reg_emo" />
+          <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+          <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+          <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+          <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+          <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+          <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_VISITA_CUSTOMER">
+      <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_CUSTOMER">
+        <MappingFragment StoreEntitySet="vis_VISITA_CUSTOMER">
+          <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+          <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+          <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+          <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+          <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+          <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+          <ScalarProperty Name="cust_mail" ColumnName="cust_mail" />
+          <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_Assigned_Visit">
+      <EntityTypeMapping TypeName="AppDTModel.vis_Assigned_Visit">
+        <MappingFragment StoreEntitySet="vis_Assigned_Visit">
+          <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+          <ScalarProperty Name="visi_op" ColumnName="visi_op" />
+          <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+          <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+          <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+          <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_VISITA_NOTVISIT">
+      <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_NOTVISIT">
+        <MappingFragment StoreEntitySet="vis_VISITA_NOTVISIT">
+          <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+          <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
+          <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+          <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+          <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="INSTRUCTOR">
+      <EntityTypeMapping TypeName="AppDTModel.INSTRUCTOR">
+        <MappingFragment StoreEntitySet="INSTRUCTOR">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="inst_mail" ColumnName="inst_mail" />
+          <ScalarProperty Name="inst_phone" ColumnName="inst_phone" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VISITA_ASSIGN">
+      <EntityTypeMapping TypeName="AppDTModel.VISITA_ASSIGN">
+        <MappingFragment StoreEntitySet="VISITA_ASSIGN">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+          <ScalarProperty Name="visi_hora" ColumnName="visi_hora" />
+          <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+          <ScalarProperty Name="visi_op" ColumnName="visi_op" />
+          <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_VISITA_REGISTRO">
+      <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO">
+        <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO">
+          <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+          <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+          <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+          <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+          <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+          <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+          <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CUSTOMER">
+      <EntityTypeMapping TypeName="AppDTModel.CUSTOMER">
+        <MappingFragment StoreEntitySet="CUSTOMER">
+          <ScalarProperty Name="cust_km" ColumnName="cust_km" />
+          <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+          <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+          <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+          <ScalarProperty Name="cust_mail" ColumnName="cust_mail" />
+          <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,31 @@
+﻿
+@(Html.Kendo().Grid<PSAppWeb.Models.CUSTOMER>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+        columns.Bound(c => c.cust_name);
+        columns.Bound(c => c.cust_phone);
+        columns.Bound(c => c.cust_mail);
+        columns.Bound(c => c.cust_dir);
+        //columns.Bound(c => c.cust_longitud);
+        //columns.Bound(c => c.cust_latitud);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+      })
+      .ToolBar(toolbar => {
+            toolbar.Create();
+            toolbar.Excel();
+            toolbar.Pdf();
+      })
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Filterable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.cust_id))
+          .Read(read => read.Action("CUSTOMER_Read", "Customer"))
+          .Create(create => create.Action("CUSTOMER_Create", "Customer"))
+          .Update(update => update.Action("CUSTOMER_Update", "Customer"))
+          .Destroy(destroy => destroy.Action("CUSTOMER_Destroy", "Customer"))
+      )
+)

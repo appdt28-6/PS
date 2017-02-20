@@ -1,0 +1,620 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AppDTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+          <Property Name="cust_mail" Type="varchar" MaxLength="50" />
+          <Property Name="cust_dir" Type="varchar(max)" />
+          <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="cust_km" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="INSTRUCTOR">
+          <Key>
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="inst_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="inst_phone" Type="varchar" MaxLength="10" />
+          <Property Name="inst_mail" Type="varchar" MaxLength="50" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NOVISITA">
+          <Key>
+            <PropertyRef Name="novi_id" />
+            <PropertyRef Name="vist_id" />
+            <PropertyRef Name="inst_id" />
+          </Key>
+          <Property Name="novi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vist_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="novi_date" Type="varchar" MaxLength="15" />
+          <Property Name="novi_hora" Type="varchar" MaxLength="15" />
+          <Property Name="novi_reason" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="Usua_Id" />
+          </Key>
+          <Property Name="Usua_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Usua_nombre" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Usua_Telefono" Type="varchar" MaxLength="150" />
+          <Property Name="Usua_Email" Type="varchar" MaxLength="100" />
+          <Property Name="Usua_Login" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Usua_Password" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Usua_Activo" Type="nchar" MaxLength="10" />
+          <Property Name="Usua_FechaCreacion" Type="datetime" />
+        </EntityType>
+        <EntityType Name="VISITA_ASSIGN">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="cust_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="visi_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="visi_date" Type="varchar" MaxLength="50" />
+          <Property Name="visi_op" Type="int" />
+          <Property Name="visi_status" Type="int" />
+          <Property Name="visi_hora" Type="varchar" MaxLength="50" />
+          <Property Name="visi_km" Type="int" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VISITA_REGISTRO">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="reg_date" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+          <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+          <Property Name="reg_end" Type="varchar" MaxLength="50" />
+          <Property Name="reg_status" Type="int" />
+          <Property Name="reg_emo" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_Assigned_Visit' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_Assigned_Visit">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="visi_date" Type="varchar" MaxLength="101" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+          <Property Name="cust_dir" Type="varchar(max)" />
+          <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="visi_op" Type="int" />
+          <Property Name="visi_status" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_CUSTOMER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_VISITA_CUSTOMER">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="visi_date" Type="varchar" MaxLength="101" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_phone" Type="nchar" MaxLength="10" />
+          <Property Name="cust_mail" Type="varchar" MaxLength="50" />
+          <Property Name="cust_dir" Type="varchar(max)" />
+          <Property Name="cust_longitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="cust_latitud" Type="nvarchar" MaxLength="50" />
+          <Property Name="visi_status" Type="int" />
+          <Property Name="prioridad" Type="int" />
+          <Property Name="visi_km" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_NOTVISIT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_VISITA_NOTVISIT">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" Nullable="false" />
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+          <Property Name="reg_end" Type="varchar" MaxLength="50" />
+          <Property Name="reg_status" Type="int" />
+          <Property Name="novi_reason" Type="varchar" MaxLength="200" />
+          <Property Name="reg_date" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_VISITA_REGISTRO">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" Nullable="false" />
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="reg_date" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+          <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+          <Property Name="reg_end" Type="varchar" MaxLength="50" />
+          <Property Name="reg_status" Type="int" />
+          <Property Name="visi_km" Type="int" />
+        </EntityType>
+        <EntityContainer Name="AppDTModelStoreContainer">
+          <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSTRUCTOR" EntityType="Self.INSTRUCTOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NOVISITA" EntityType="Self.NOVISITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VISITA_ASSIGN" EntityType="Self.VISITA_ASSIGN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VISITA_REGISTRO" EntityType="Self.VISITA_REGISTRO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vis_Assigned_Visit" EntityType="Self.vis_Assigned_Visit" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_Assigned_Visit].[visi_id] AS [visi_id], 
+[vis_Assigned_Visit].[inst_id] AS [inst_id], 
+[vis_Assigned_Visit].[inst_name] AS [inst_name], 
+[vis_Assigned_Visit].[visi_date] AS [visi_date], 
+[vis_Assigned_Visit].[cust_id] AS [cust_id], 
+[vis_Assigned_Visit].[cust_name] AS [cust_name], 
+[vis_Assigned_Visit].[cust_phone] AS [cust_phone], 
+[vis_Assigned_Visit].[cust_dir] AS [cust_dir], 
+[vis_Assigned_Visit].[cust_longitud] AS [cust_longitud], 
+[vis_Assigned_Visit].[cust_latitud] AS [cust_latitud], 
+[vis_Assigned_Visit].[visi_op] AS [visi_op], 
+[vis_Assigned_Visit].[visi_status] AS [visi_status]
+FROM [dbo].[vis_Assigned_Visit] AS [vis_Assigned_Visit]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vis_VISITA_CUSTOMER" EntityType="Self.vis_VISITA_CUSTOMER" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_VISITA_CUSTOMER].[visi_id] AS [visi_id], 
+[vis_VISITA_CUSTOMER].[inst_id] AS [inst_id], 
+[vis_VISITA_CUSTOMER].[visi_date] AS [visi_date], 
+[vis_VISITA_CUSTOMER].[cust_id] AS [cust_id], 
+[vis_VISITA_CUSTOMER].[cust_name] AS [cust_name], 
+[vis_VISITA_CUSTOMER].[cust_phone] AS [cust_phone], 
+[vis_VISITA_CUSTOMER].[cust_mail] AS [cust_mail], 
+[vis_VISITA_CUSTOMER].[cust_dir] AS [cust_dir], 
+[vis_VISITA_CUSTOMER].[cust_longitud] AS [cust_longitud], 
+[vis_VISITA_CUSTOMER].[cust_latitud] AS [cust_latitud], 
+[vis_VISITA_CUSTOMER].[visi_status] AS [visi_status], 
+[vis_VISITA_CUSTOMER].[prioridad] AS [prioridad], 
+[vis_VISITA_CUSTOMER].[visi_km] AS [visi_km]
+FROM [dbo].[vis_VISITA_CUSTOMER] AS [vis_VISITA_CUSTOMER]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vis_VISITA_NOTVISIT" EntityType="Self.vis_VISITA_NOTVISIT" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_VISITA_NOTVISIT].[reg_id] AS [reg_id], 
+[vis_VISITA_NOTVISIT].[visi_id] AS [visi_id], 
+[vis_VISITA_NOTVISIT].[inst_id] AS [inst_id], 
+[vis_VISITA_NOTVISIT].[inst_name] AS [inst_name], 
+[vis_VISITA_NOTVISIT].[cust_id] AS [cust_id], 
+[vis_VISITA_NOTVISIT].[cust_name] AS [cust_name], 
+[vis_VISITA_NOTVISIT].[reg_ini] AS [reg_ini], 
+[vis_VISITA_NOTVISIT].[reg_end] AS [reg_end], 
+[vis_VISITA_NOTVISIT].[reg_status] AS [reg_status], 
+[vis_VISITA_NOTVISIT].[novi_reason] AS [novi_reason], 
+[vis_VISITA_NOTVISIT].[reg_date] AS [reg_date]
+FROM [dbo].[vis_VISITA_NOTVISIT] AS [vis_VISITA_NOTVISIT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vis_VISITA_REGISTRO" EntityType="Self.vis_VISITA_REGISTRO" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO].[cust_id] AS [cust_id], 
+[vis_VISITA_REGISTRO].[cust_name] AS [cust_name], 
+[vis_VISITA_REGISTRO].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO].[reg_status] AS [reg_status], 
+[vis_VISITA_REGISTRO].[visi_km] AS [visi_km]
+FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AppDTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="Usua_Id" />
+          </Key>
+          <Property Name="Usua_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usua_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usua_Telefono" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Login" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usua_Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usua_Activo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Usua_FechaCreacion" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="AppDTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <EntitySet Name="NOVISITA" EntityType="AppDTModel.NOVISITA" />
+          <EntitySet Name="VISITA_REGISTRO" EntityType="AppDTModel.VISITA_REGISTRO" />
+          <EntitySet Name="vis_VISITA_CUSTOMER" EntityType="AppDTModel.vis_VISITA_CUSTOMER" />
+          <EntitySet Name="vis_Assigned_Visit" EntityType="AppDTModel.vis_Assigned_Visit" />
+          <EntitySet Name="vis_VISITA_NOTVISIT" EntityType="AppDTModel.vis_VISITA_NOTVISIT" />
+          <EntitySet Name="INSTRUCTOR" EntityType="AppDTModel.INSTRUCTOR" />
+          <EntitySet Name="VISITA_ASSIGN" EntityType="AppDTModel.VISITA_ASSIGN" />
+          <EntitySet Name="vis_VISITA_REGISTRO" EntityType="AppDTModel.vis_VISITA_REGISTRO" />
+          <EntitySet Name="CUSTOMER" EntityType="AppDTModel.CUSTOMER" />
+        </EntityContainer>
+        <EntityType Name="NOVISITA">
+          <Key>
+            <PropertyRef Name="novi_id" />
+            <PropertyRef Name="vist_id" />
+            <PropertyRef Name="inst_id" />
+          </Key>
+          <Property Name="novi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vist_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="novi_date" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="novi_hora" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="novi_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VISITA_REGISTRO">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
+          <Property Name="reg_emo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_CUSTOMER">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_date" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cust_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_dir" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cust_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visi_status" Type="Int32" />
+          <Property Name="prioridad" Type="Int32" />
+          <Property Name="visi_km" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vis_Assigned_Visit">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="visi_date" Type="String" MaxLength="101" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cust_dir" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cust_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visi_op" Type="Int32" />
+          <Property Name="visi_status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_NOTVISIT">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
+          <Property Name="novi_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="INSTRUCTOR">
+          <Key>
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="inst_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="inst_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="inst_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VISITA_ASSIGN">
+          <Key>
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="cust_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="visi_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="visi_op" Type="Int32" />
+          <Property Name="visi_status" Type="Int32" />
+          <Property Name="visi_hora" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="visi_km" Type="Int32" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_REGISTRO">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
+          <Property Name="visi_km" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="cust_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_dir" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="cust_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cust_km" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AppDTModelStoreContainer" CdmEntityContainer="AppDTEntities">
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="AppDTModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="Usua_Id" ColumnName="Usua_Id" />
+                <ScalarProperty Name="Usua_nombre" ColumnName="Usua_nombre" />
+                <ScalarProperty Name="Usua_Telefono" ColumnName="Usua_Telefono" />
+                <ScalarProperty Name="Usua_Email" ColumnName="Usua_Email" />
+                <ScalarProperty Name="Usua_Login" ColumnName="Usua_Login" />
+                <ScalarProperty Name="Usua_Password" ColumnName="Usua_Password" />
+                <ScalarProperty Name="Usua_Activo" ColumnName="Usua_Activo" />
+                <ScalarProperty Name="Usua_FechaCreacion" ColumnName="Usua_FechaCreacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NOVISITA">
+            <EntityTypeMapping TypeName="AppDTModel.NOVISITA">
+              <MappingFragment StoreEntitySet="NOVISITA">
+                <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
+                <ScalarProperty Name="novi_hora" ColumnName="novi_hora" />
+                <ScalarProperty Name="novi_date" ColumnName="novi_date" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="vist_id" ColumnName="vist_id" />
+                <ScalarProperty Name="novi_id" ColumnName="novi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VISITA_REGISTRO">
+            <EntityTypeMapping TypeName="AppDTModel.VISITA_REGISTRO">
+              <MappingFragment StoreEntitySet="VISITA_REGISTRO">
+                <ScalarProperty Name="reg_emo" ColumnName="reg_emo" />
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+                <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+                <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_CUSTOMER">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_CUSTOMER">
+              <MappingFragment StoreEntitySet="vis_VISITA_CUSTOMER">
+                <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+                <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+                <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+                <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+                <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+                <ScalarProperty Name="cust_mail" ColumnName="cust_mail" />
+                <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_Assigned_Visit">
+            <EntityTypeMapping TypeName="AppDTModel.vis_Assigned_Visit">
+              <MappingFragment StoreEntitySet="vis_Assigned_Visit">
+                <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+                <ScalarProperty Name="visi_op" ColumnName="visi_op" />
+                <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+                <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+                <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+                <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_NOTVISIT">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_NOTVISIT">
+              <MappingFragment StoreEntitySet="vis_VISITA_NOTVISIT">
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSTRUCTOR">
+            <EntityTypeMapping TypeName="AppDTModel.INSTRUCTOR">
+              <MappingFragment StoreEntitySet="INSTRUCTOR">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="inst_mail" ColumnName="inst_mail" />
+                <ScalarProperty Name="inst_phone" ColumnName="inst_phone" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VISITA_ASSIGN">
+            <EntityTypeMapping TypeName="AppDTModel.VISITA_ASSIGN">
+              <MappingFragment StoreEntitySet="VISITA_ASSIGN">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+                <ScalarProperty Name="visi_hora" ColumnName="visi_hora" />
+                <ScalarProperty Name="visi_status" ColumnName="visi_status" />
+                <ScalarProperty Name="visi_op" ColumnName="visi_op" />
+                <ScalarProperty Name="visi_date" ColumnName="visi_date" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_REGISTRO">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO">
+              <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO">
+                <ScalarProperty Name="visi_km" ColumnName="visi_km" />
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+                <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+                <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMER">
+            <EntityTypeMapping TypeName="AppDTModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMER">
+                <ScalarProperty Name="cust_km" ColumnName="cust_km" />
+                <ScalarProperty Name="cust_latitud" ColumnName="cust_latitud" />
+                <ScalarProperty Name="cust_longitud" ColumnName="cust_longitud" />
+                <ScalarProperty Name="cust_dir" ColumnName="cust_dir" />
+                <ScalarProperty Name="cust_mail" ColumnName="cust_mail" />
+                <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

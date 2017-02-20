@@ -1,0 +1,198 @@
+﻿@using PSAppWeb.Models
+
+@{
+    ViewBag.Title = "Visitas Realizadas";
+    List<VISITA_REGISTRO> Model = (List<VISITA_REGISTRO>)ViewData["DynamicMapa"];
+}
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyD6c_snztUS-wQ4qhWbo4LV8xPtMfwFpcI"
+        type="text/javascript"></script>
+<!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
+<!--primermapa-->
+
+<div class="banner">
+    <h2>
+        <a href="#">Visitas Relizadas @DateTime.Now</a>
+    </h2>
+</div>
+
+<div class="blank">
+    <div class="blank-page">
+
+        Visitas realizadas
+        @(Html.Kendo().Grid<PSAppWeb.Models.vis_VISITA_REGISTRO>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.visi_id).Title("ID Visita");
+          columns.Bound(c => c.inst_name).Title("Instalador");
+          columns.Bound(c => c.cust_name).Title("Cliente");
+          columns.Bound(c => c.reg_date).Title("Fecha");
+          // columns.Bound(c => c.reg_lat).Hidden();
+          //columns.Bound(c => c.reg_lon).Hidden();
+          columns.Bound(c => c.reg_ini).Title("Inicio de Visita");
+          columns.Bound(c => c.reg_end).Title("Fin de Visita");
+          columns.Bound(c => c.visi_km).Title("Km por visita");
+          columns.Bound(c => c.reg_status).Hidden();
+
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+      .Pageable()
+      .Scrollable()
+       .ClientDetailTemplateId("template")
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Read(read => read.Action("VISITA_REGISTRO_Read", "Visitas"))
+      )
+        )
+
+        <br />
+        <label>Visitas no realizadas</label>
+        @(Html.Kendo().Grid<PSAppWeb.Models.vis_VISITA_NOTVISIT>()
+      .Name("grid2")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.visi_id).Title("ID Visita");
+          columns.Bound(c => c.inst_id).Title("Instalador");
+          columns.Bound(c => c.cust_id).Title("Cliente");
+          columns.Bound(c => c.reg_date).Title("Fecha");
+          //columns.Bound(c => c.reg_lat).Hidden();
+          //columns.Bound(c => c.reg_lon).Hidden();
+          columns.Bound(c => c.reg_ini).Title("Inicio de Visita");
+          columns.Bound(c => c.novi_reason).Title("Razon de no visita");
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+      .Pageable()
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.visi_id))
+          .Read(read => read.Action("VISITA_REGISTRO_Read_NotVisist", "Visitas"))
+      )
+        )
+
+
+        <br />
+        <div id="map2" style="width: 100%; height:800px"></div>
+
+    </div>
+</div>
+<script id="template" type="text/kendo-tmpl">
+    @(Html.Kendo().Grid<PSAppWeb.Models.VISITA_REGISTRO>()
+            .Name("grid_#=visi_id#") // template expression, to be evaluated in the master context
+            .Columns(columns =>
+            {
+                columns.Bound(o => o.visi_id).Hidden();
+                columns.Bound(o => o.reg_emo).Title("Que le parecio el servicio?");
+            })
+            .DataSource(dataSource => dataSource
+                .Ajax()
+                .PageSize(10)
+                .Read(read => read.Action("VISITA_REGISTRO_Read_Survey", "Visitas", new { visita = "#=visi_id#" }))
+            )
+            .Pageable()
+            .Sortable()
+            .ToClientTemplate()
+    )
+</script>
+<!--primerscript-->
+<script language="javascript" type="text/javascript">
+    $(document).ready( function LoadMap() {
+        var map = new GMap2(document.getElementById("map2"));
+        map.addControl(new GLargeMapControl());
+        map.addControl(new GMapTypeControl());
+        map.setCenter(new GLatLng(20.5887932,-100.38988810000001), 10);
+
+
+
+        function CrearMarca(punto, html,markerOptions) {
+            //alert(iconoMarca)
+            var mMarca = new GMarker(punto,markerOptions);
+            map.addOverlay(mMarca);
+            GEvent.addListener(mMarca, "click", function () {
+                //miMarca.openInfoWindowHtml(html);
+                mMarca.openInfoWindowHtml(html);
+            });
+            return mMarca;
+
+        }
+
+        var estilo_bocadillo = "font-size: 10pt; font-family: verdana; lineheight: 20%;";
+        var point;
+        var icoN;
+
+        @if (Model != null)
+            {
+
+            foreach (var marker in Model)
+            {
+                <text>
+        map.setCenter(new GLatLng( @marker.reg_lat, @marker.reg_lon), 18);
+
+        point=new GLatLng(@marker.reg_lat, @marker.reg_lon);
+        icoN = new GIcon(G_DEFAULT_ICON);
+        if(@marker.reg_status==3){
+        icoN.image = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
+        }
+        else{
+            icoN.image = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        }
+
+        var markerOptions = {icon:icoN};
+        var customer ="<h3>@marker.visi_id</h3><br><p>@marker.reg_date</p><br><p>Hora inicio:@marker.reg_ini Hora final: @marker.reg_end</p>";
+        var htmlBocadillo =customer;
+        mark = CrearMarca(point, htmlBocadillo,markerOptions);
+        //////
+        </text>
+
+                }
+        }
+        //polyline
+        var points=[
+                        @if (Model != null)
+                            {
+                    foreach (var item in Model)
+                    {
+                        if (@item.reg_date == "Planeado_" + @item.inst_id)
+                        {
+                                             <text>
+                                        points=new GLatLng(@item.reg_lat, @item.reg_lon),
+                                 </text>
+                                    }
+
+                    }
+                }
+        ];
+
+        var polyline = new GPolyline(points, '#00ff00', 5, 0.7);
+        map.addOverlay(polyline);
+
+        @*
+        //polyline2
+        var points2=[
+              @if (Model != null)
+                  {
+                    foreach (var item in Model)
+                    {
+                        if (@item.advi_id != "Planeado_" + @item.vendedor)
+                        {
+                                             <text>
+                                         points2=new GLatLng(@item.actl_latitud, @item.actl_longitud),
+                                         </text>
+                                            }
+
+                    }
+                }
+        ];
+        var polyline2 = new GPolyline(points2, '#ff0000', 5, 0.7);
+        map.addOverlay(polyline2);
+            *@
+    })
+</script>
