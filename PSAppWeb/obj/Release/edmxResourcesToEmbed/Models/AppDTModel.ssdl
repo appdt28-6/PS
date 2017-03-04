@@ -173,6 +173,47 @@ warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO' does not hav
     <Property Name="reg_status" Type="int" />
     <Property Name="visi_km" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO_EMERGENTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_VISITA_REGISTRO_EMERGENTE">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" Nullable="false" />
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="reg_date" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+    <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+    <Property Name="reg_end" Type="varchar" MaxLength="50" />
+    <Property Name="reg_status" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO_Map' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vis_VISITA_REGISTRO_Map">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reg_id" Type="int" Nullable="false" />
+    <Property Name="visi_id" Type="int" Nullable="false" />
+    <Property Name="inst_id" Type="int" Nullable="false" />
+    <Property Name="inst_name" Type="varchar" MaxLength="50" />
+    <Property Name="cust_id" Type="int" Nullable="false" />
+    <Property Name="cust_name" Type="varchar" MaxLength="50" />
+    <Property Name="reg_date" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+    <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+    <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+    <Property Name="reg_end" Type="varchar" MaxLength="50" />
+    <Property Name="reg_status" Type="int" />
+  </EntityType>
   <EntityContainer Name="AppDTModelStoreContainer">
     <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="INSTRUCTOR" EntityType="Self.INSTRUCTOR" Schema="dbo" store:Type="Tables" />
@@ -244,6 +285,36 @@ FROM [dbo].[vis_VISITA_NOTVISIT] AS [vis_VISITA_NOTVISIT]</DefiningQuery>
 [vis_VISITA_REGISTRO].[reg_status] AS [reg_status], 
 [vis_VISITA_REGISTRO].[visi_km] AS [visi_km]
 FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_VISITA_REGISTRO_EMERGENTE" EntityType="Self.vis_VISITA_REGISTRO_EMERGENTE" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_status] AS [reg_status]
+FROM [dbo].[vis_VISITA_REGISTRO_EMERGENTE] AS [vis_VISITA_REGISTRO_EMERGENTE]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vis_VISITA_REGISTRO_Map" EntityType="Self.vis_VISITA_REGISTRO_Map" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO_Map].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO_Map].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO_Map].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO_Map].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO_Map].[cust_id] AS [cust_id], 
+[vis_VISITA_REGISTRO_Map].[cust_name] AS [cust_name], 
+[vis_VISITA_REGISTRO_Map].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO_Map].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO_Map].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO_Map].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO_Map].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO_Map].[reg_status] AS [reg_status]
+FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery>
     </EntitySet>
   </EntityContainer>
 </Schema>

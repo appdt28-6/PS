@@ -178,6 +178,47 @@ warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO' does not hav
           <Property Name="reg_status" Type="int" />
           <Property Name="visi_km" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO_EMERGENTE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_VISITA_REGISTRO_EMERGENTE">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" Nullable="false" />
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="reg_date" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+          <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+          <Property Name="reg_end" Type="varchar" MaxLength="50" />
+          <Property Name="reg_status" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A09B1F_ps.dbo.vis_VISITA_REGISTRO_Map' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vis_VISITA_REGISTRO_Map">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="int" Nullable="false" />
+          <Property Name="visi_id" Type="int" Nullable="false" />
+          <Property Name="inst_id" Type="int" Nullable="false" />
+          <Property Name="inst_name" Type="varchar" MaxLength="50" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="cust_name" Type="varchar" MaxLength="50" />
+          <Property Name="reg_date" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lat" Type="varchar" MaxLength="50" />
+          <Property Name="reg_lon" Type="varchar" MaxLength="50" />
+          <Property Name="reg_ini" Type="varchar" MaxLength="50" />
+          <Property Name="reg_end" Type="varchar" MaxLength="50" />
+          <Property Name="reg_status" Type="int" />
+        </EntityType>
         <EntityContainer Name="AppDTModelStoreContainer">
           <EntitySet Name="CUSTOMER" EntityType="Self.CUSTOMER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="INSTRUCTOR" EntityType="Self.INSTRUCTOR" Schema="dbo" store:Type="Tables" />
@@ -250,6 +291,36 @@ FROM [dbo].[vis_VISITA_NOTVISIT] AS [vis_VISITA_NOTVISIT]</DefiningQuery>
 [vis_VISITA_REGISTRO].[visi_km] AS [visi_km]
 FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vis_VISITA_REGISTRO_EMERGENTE" EntityType="Self.vis_VISITA_REGISTRO_EMERGENTE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO_EMERGENTE].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO_EMERGENTE].[reg_status] AS [reg_status]
+FROM [dbo].[vis_VISITA_REGISTRO_EMERGENTE] AS [vis_VISITA_REGISTRO_EMERGENTE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vis_VISITA_REGISTRO_Map" EntityType="Self.vis_VISITA_REGISTRO_Map" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vis_VISITA_REGISTRO_Map].[reg_id] AS [reg_id], 
+[vis_VISITA_REGISTRO_Map].[visi_id] AS [visi_id], 
+[vis_VISITA_REGISTRO_Map].[inst_id] AS [inst_id], 
+[vis_VISITA_REGISTRO_Map].[inst_name] AS [inst_name], 
+[vis_VISITA_REGISTRO_Map].[cust_id] AS [cust_id], 
+[vis_VISITA_REGISTRO_Map].[cust_name] AS [cust_name], 
+[vis_VISITA_REGISTRO_Map].[reg_date] AS [reg_date], 
+[vis_VISITA_REGISTRO_Map].[reg_lat] AS [reg_lat], 
+[vis_VISITA_REGISTRO_Map].[reg_lon] AS [reg_lon], 
+[vis_VISITA_REGISTRO_Map].[reg_ini] AS [reg_ini], 
+[vis_VISITA_REGISTRO_Map].[reg_end] AS [reg_end], 
+[vis_VISITA_REGISTRO_Map].[reg_status] AS [reg_status]
+FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -279,6 +350,8 @@ FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
           <EntitySet Name="VISITA_ASSIGN" EntityType="AppDTModel.VISITA_ASSIGN" />
           <EntitySet Name="vis_VISITA_REGISTRO" EntityType="AppDTModel.vis_VISITA_REGISTRO" />
           <EntitySet Name="CUSTOMER" EntityType="AppDTModel.CUSTOMER" />
+          <EntitySet Name="vis_VISITA_REGISTRO_EMERGENTE" EntityType="AppDTModel.vis_VISITA_REGISTRO_EMERGENTE" />
+          <EntitySet Name="vis_VISITA_REGISTRO_Map" EntityType="AppDTModel.vis_VISITA_REGISTRO_Map" />
         </EntityContainer>
         <EntityType Name="NOVISITA">
           <Key>
@@ -431,6 +504,43 @@ FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
           <Property Name="cust_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="cust_km" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_REGISTRO_EMERGENTE">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_REGISTRO_Map">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -591,6 +701,40 @@ FROM [dbo].[vis_VISITA_REGISTRO] AS [vis_VISITA_REGISTRO]</DefiningQuery>
                 <ScalarProperty Name="cust_phone" ColumnName="cust_phone" />
                 <ScalarProperty Name="cust_name" ColumnName="cust_name" />
                 <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_REGISTRO_EMERGENTE">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO_EMERGENTE">
+              <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO_EMERGENTE">
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+                <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+                <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_REGISTRO_Map">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO_Map">
+              <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO_Map">
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+                <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+                <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

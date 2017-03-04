@@ -24,6 +24,8 @@
     <EntitySet Name="VISITA_ASSIGN" EntityType="AppDTModel.VISITA_ASSIGN" />
     <EntitySet Name="vis_VISITA_REGISTRO" EntityType="AppDTModel.vis_VISITA_REGISTRO" />
     <EntitySet Name="CUSTOMER" EntityType="AppDTModel.CUSTOMER" />
+    <EntitySet Name="vis_VISITA_REGISTRO_EMERGENTE" EntityType="AppDTModel.vis_VISITA_REGISTRO_EMERGENTE" />
+    <EntitySet Name="vis_VISITA_REGISTRO_Map" EntityType="AppDTModel.vis_VISITA_REGISTRO_Map" />
   </EntityContainer>
   <EntityType Name="NOVISITA">
     <Key>
@@ -176,5 +178,42 @@
     <Property Name="cust_longitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="cust_km" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vis_VISITA_REGISTRO_EMERGENTE">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+    </Key>
+    <Property Name="reg_id" Type="Int32" Nullable="false" />
+    <Property Name="visi_id" Type="Int32" Nullable="false" />
+    <Property Name="inst_id" Type="Int32" Nullable="false" />
+    <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_status" Type="Int32" />
+  </EntityType>
+  <EntityType Name="vis_VISITA_REGISTRO_Map">
+    <Key>
+      <PropertyRef Name="reg_id" />
+      <PropertyRef Name="visi_id" />
+      <PropertyRef Name="inst_id" />
+      <PropertyRef Name="cust_id" />
+    </Key>
+    <Property Name="reg_id" Type="Int32" Nullable="false" />
+    <Property Name="visi_id" Type="Int32" Nullable="false" />
+    <Property Name="inst_id" Type="Int32" Nullable="false" />
+    <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cust_id" Type="Int32" Nullable="false" />
+    <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_lat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_lon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="reg_status" Type="Int32" />
   </EntityType>
 </Schema>

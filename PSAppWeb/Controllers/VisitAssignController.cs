@@ -179,6 +179,9 @@ namespace PSAppWeb.Controllers
                 var hora = words[1];
                 var km = db.CUSTOMER.Where(a => a.cust_id == Cust).ToList();
                 var k = Convert.ToInt32(km[0].cust_km);
+                string ok="";
+                var buscar = db.VISITA_ASSIGN.Where(a => a.inst_id == Inst && a.visi_hora == hora);
+                if (buscar.Count() == 0) { 
 
                 var entity = new VISITA_ASSIGN
                 {
@@ -193,11 +196,18 @@ namespace PSAppWeb.Controllers
                 };
                 db.VISITA_ASSIGN.Add(entity);
                 db.SaveChanges();
-                return Json(new { succes = "OK" });
+                    return Json(new { success = true, responseText = "Cita Asignada con Exito.!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { success = false, responseText = "El instructor seleccionado ya tiene cita programada a las "+hora+"." }, JsonRequestBehavior.AllowGet);
+                }
+
+               // return Json(new { succes = ok });
             }
             catch (Exception e)
             {
-                return View();
+                return Json(new { success = false, responseText = "Error!" }, JsonRequestBehavior.AllowGet);
             }
 
 

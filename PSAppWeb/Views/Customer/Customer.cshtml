@@ -1,20 +1,34 @@
-﻿
-@(Html.Kendo().Grid<PSAppWeb.Models.CUSTOMER>()
+﻿@{
+    ViewBag.Title = "Clientes";
+}
+<!-- or when using the Kendo UI CDN -->
+<div class="banner">
+    <h2>
+        <a href="#">Clientes</a>
+    </h2>
+</div>
+
+<div class="blank">
+    <div class="blank-page">
+
+
+        @(Html.Kendo().Grid<PSAppWeb.Models.CUSTOMER>()
       .Name("grid")
       .Columns(columns =>
       {
-        columns.Bound(c => c.cust_name);
-        columns.Bound(c => c.cust_phone);
-        columns.Bound(c => c.cust_mail);
-        columns.Bound(c => c.cust_dir);
-        //columns.Bound(c => c.cust_longitud);
-        //columns.Bound(c => c.cust_latitud);
-        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+          columns.Bound(c => c.cust_name).Title("Telefono");
+          columns.Bound(c => c.cust_phone).Title("Telefono");
+          columns.Bound(c => c.cust_mail).Title("Email");
+          columns.Bound(c => c.cust_dir).Title("Direccion");
+          //columns.Bound(c => c.cust_longitud);
+          //columns.Bound(c => c.cust_latitud);
+          columns.Command(command => { command.Edit().Text("Editar"); command.Destroy().Text("Eliminar"); }).Width(180);
       })
-      .ToolBar(toolbar => {
-            toolbar.Create();
-            toolbar.Excel();
-            toolbar.Pdf();
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create().Text("Nuevo");
+          toolbar.Excel();
+          toolbar.Pdf();
       })
       .Editable(editable => editable.Mode(GridEditMode.InLine))
       .Pageable()
@@ -27,5 +41,7 @@
           .Create(create => create.Action("CUSTOMER_Create", "Customer"))
           .Update(update => update.Action("CUSTOMER_Update", "Customer"))
           .Destroy(destroy => destroy.Action("CUSTOMER_Destroy", "Customer"))
-      )
-)
+      ).HtmlAttributes(new { style = "height: 600px" })
+        )
+</div>
+</div>

@@ -179,12 +179,17 @@
                 data: { Cust: cliente, Inst: instalador, Prio: prioridad, Fecha: datepicker },
                 url: '@Url.Action("SetVisita", "VisitAssign")',
                 dataType: 'json',
-                success: function (result) {
-                $("#grid").data("kendoGrid").dataSource.read();
-                $('#grid').data('kendoGrid').refresh();
-                   alert("Activo Asignado con exito.")
+                success: function (response) {
+                    if (response != null && response.success) {
+                        $("#grid").data("kendoGrid").dataSource.read();
+                        $('#grid').data('kendoGrid').refresh();
+                        alert(response.responseText);
+                    } else {
+                        // DoSomethingElse()
+                        alert(response.responseText);
+                    }
                 },
-                error: function (result) {
+                error: function (response) {
                     alert("error!");  //
                 }
 

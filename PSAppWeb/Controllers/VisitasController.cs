@@ -18,7 +18,7 @@ namespace PSAppWeb.Controllers
             if (Session["user_id"] != null)
             {
                 string date = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                ViewData["DynamicMapa"] = db.VISITA_REGISTRO.Where(x => x.reg_date == date).ToList();
+                ViewData["DynamicMapa"] = db.vis_VISITA_REGISTRO_Map.Where(x => x.reg_date == date).ToList();
                 return View();
             }
             else
@@ -31,11 +31,9 @@ namespace PSAppWeb.Controllers
         {
             //TimeZoneMX datemx = new TimeZoneMX();
             //var dateIni = datemx.GetDateMX();
-
-
             string date = DateTime.Now.Date.ToString("yyyy-MM-dd");
             // IQueryable<vis_VISITA_REGISTRO> visita_registro = db.vis_VISITA_REGISTRO.Where(x => String.Compare(x.reg_date, dateIni) > 0 && String.Compare(x.reg_date, dateEnd) < 0&&x.reg_status<=2);
-            IQueryable<vis_VISITA_REGISTRO> visita_registro = db.vis_VISITA_REGISTRO.Where(x => x.reg_date == date && x.reg_status <= 2);
+            IQueryable<vis_VISITA_REGISTRO> visita_registro = db.vis_VISITA_REGISTRO.Where(x => x.reg_date == date && x.reg_status != 3);
             DataSourceResult result = visita_registro.ToDataSourceResult(request, vISITA_REGISTRO => new {
                 reg_id = vISITA_REGISTRO.reg_id,
                 visi_id = vISITA_REGISTRO.visi_id,
@@ -52,7 +50,6 @@ namespace PSAppWeb.Controllers
 
             return Json(result);
         }
-
 
         public ActionResult VISITA_REGISTRO_Read_Survey([DataSourceRequest]DataSourceRequest request, int visita)
         {
@@ -89,7 +86,6 @@ namespace PSAppWeb.Controllers
             return Json(result);
         }
 
-
         [HttpPost]
         public ActionResult Excel_Export_Save(string contentType, string base64, string fileName)
         {
@@ -110,6 +106,28 @@ namespace PSAppWeb.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ActionResult VISITA_REGISTRO_Emergente([DataSourceRequest]DataSourceRequest request)
+        {
+            //TimeZoneMX datemx = new TimeZoneMX();
+            //var dateIni = datemx.GetDateMX();
+            string date = DateTime.Now.Date.ToString("yyyy-MM-dd");
+            // IQueryable<vis_VISITA_REGISTRO> visita_registro = db.vis_VISITA_REGISTRO.Where(x => String.Compare(x.reg_date, dateIni) > 0 && String.Compare(x.reg_date, dateEnd) < 0&&x.reg_status<=2);
+            IQueryable<vis_VISITA_REGISTRO_EMERGENTE> visita_registro = db.vis_VISITA_REGISTRO_EMERGENTE.Where(x => x.reg_date == date && x.reg_status == 8);
+            DataSourceResult result = visita_registro.ToDataSourceResult(request, vISITA_REGISTRO => new {
+                reg_id = vISITA_REGISTRO.reg_id,
+                visi_id = vISITA_REGISTRO.visi_id,
+                inst_name = vISITA_REGISTRO.inst_name,
+                reg_date = vISITA_REGISTRO.reg_date,
+                reg_lat = vISITA_REGISTRO.reg_lat,
+                reg_lon = vISITA_REGISTRO.reg_lon,
+                reg_ini = vISITA_REGISTRO.reg_ini,
+                reg_end = vISITA_REGISTRO.reg_end,
+                reg_status = vISITA_REGISTRO.reg_status,
+            });
+
+            return Json(result);
         }
     }
 }

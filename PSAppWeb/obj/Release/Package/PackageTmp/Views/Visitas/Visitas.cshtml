@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Visitas Realizadas";
-    List<VISITA_REGISTRO> Model = (List<VISITA_REGISTRO>)ViewData["DynamicMapa"];
+    List<vis_VISITA_REGISTRO_Map> Model = (List<vis_VISITA_REGISTRO_Map>)ViewData["DynamicMapa"];
 }
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=AIzaSyD6c_snztUS-wQ4qhWbo4LV8xPtMfwFpcI"
         type="text/javascript"></script>
@@ -24,7 +24,7 @@
       .Columns(columns =>
       {
           columns.Bound(c => c.visi_id).Title("ID Visita");
-          columns.Bound(c => c.inst_name).Title("Instalador");
+          columns.Bound(c => c.inst_name).Title("Instructor");
           columns.Bound(c => c.cust_name).Title("Cliente");
           columns.Bound(c => c.reg_date).Title("Fecha");
           // columns.Bound(c => c.reg_lat).Hidden();
@@ -40,16 +40,57 @@
           toolbar.Excel();
           toolbar.Pdf();
       })
-      .Pageable()
+       .Pageable(pager => pager
+    .Messages(messages => messages
+    .Display("{0} a {1}. Total de: {2}")
+    .Empty("Sin registros")))
+      .Filterable(f => f
+            .Messages(m => m
+                .Info("Mostrar registros con:")
+                .Filter("Filtrar")
+                .Clear("Limpiar")
+                .IsTrue("y verdadero")
+                .IsFalse("y falso")
+                .And("y")
+                .Or("o")
+            )
+            .Operators(o => o
+                .ForString(fs => fs
+                    .Contains("contiene")
+                    .DoesNotContain("no contiene")
+                    .EndsWith("termina con")
+                    .IsEqualTo("es igual a")
+                    .IsNotEqualTo("no es igual a")
+                    .StartsWith("empieza con")
+                )
+                .ForNumber(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+                .ForDate(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+            )
+        )
       .Scrollable()
        .ClientDetailTemplateId("template")
       .DataSource(dataSource => dataSource
           .Ajax()
           .Read(read => read.Action("VISITA_REGISTRO_Read", "Visitas"))
-      )
+      ).HtmlAttributes(new { style = "height: 600px" })
         )
 
         <br />
+        
         <label>Visitas no realizadas</label>
         @(Html.Kendo().Grid<PSAppWeb.Models.vis_VISITA_NOTVISIT>()
       .Name("grid2")
@@ -69,18 +110,126 @@
           toolbar.Excel();
           toolbar.Pdf();
       })
-      .Pageable()
+       .Pageable(pager => pager
+    .Messages(messages => messages
+    .Display("{0} a {1}. Total de: {2}")
+    .Empty("Sin registros")))
+      .Filterable(f => f
+            .Messages(m => m
+                .Info("Mostrar registros con:")
+                .Filter("Filtrar")
+                .Clear("Limpiar")
+                .IsTrue("y verdadero")
+                .IsFalse("y falso")
+                .And("y")
+                .Or("o")
+            )
+            .Operators(o => o
+                .ForString(fs => fs
+                    .Contains("contiene")
+                    .DoesNotContain("no contiene")
+                    .EndsWith("termina con")
+                    .IsEqualTo("es igual a")
+                    .IsNotEqualTo("no es igual a")
+                    .StartsWith("empieza con")
+                )
+                .ForNumber(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+                .ForDate(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+            )
+        )
       .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
           .Model(model => model.Id(p => p.visi_id))
           .Read(read => read.Action("VISITA_REGISTRO_Read_NotVisist", "Visitas"))
-      )
+      ).HtmlAttributes(new { style = "height: 600px" })
         )
 
 
         <br />
+        <label>Visitas Emergentes</label>
+        @(Html.Kendo().Grid<PSAppWeb.Models.vis_VISITA_REGISTRO_EMERGENTE>()
+      .Name("grid3")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.visi_id).Hidden();
+          columns.Bound(c => c.inst_name).Title("Instalador");
+          columns.Bound(c => c.reg_date).Title("Fecha");
+          columns.Bound(c => c.reg_ini).Title("Hora de registro");
+      })
+      .ToolBar(toolbar =>
+      {
+          toolbar.Excel();
+          toolbar.Pdf();
+      })
+       .Pageable(pager => pager
+    .Messages(messages => messages
+    .Display("{0} a {1}. Total de: {2}")
+    .Empty("Sin registros")))
+      .Filterable(f => f
+            .Messages(m => m
+                .Info("Mostrar registros con:")
+                .Filter("Filtrar")
+                .Clear("Limpiar")
+                .IsTrue("y verdadero")
+                .IsFalse("y falso")
+                .And("y")
+                .Or("o")
+            )
+            .Operators(o => o
+                .ForString(fs => fs
+                    .Contains("contiene")
+                    .DoesNotContain("no contiene")
+                    .EndsWith("termina con")
+                    .IsEqualTo("es igual a")
+                    .IsNotEqualTo("no es igual a")
+                    .StartsWith("empieza con")
+                )
+                .ForNumber(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+                .ForDate(fs => fs
+                    .IsEqualTo("es igual a")
+                    .IsGreaterThan("es mayor a")
+                    .IsGreaterThanOrEqualTo("es mayor o igual a")
+                    .IsLessThan("es menor que")
+                    .IsLessThanOrEqualTo("es menor o igual a")
+                    .IsNotEqualTo("no es igual a")
+                )
+            )
+        )
+      .Scrollable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model => model.Id(p => p.visi_id))
+          .Read(read => read.Action("VISITA_REGISTRO_Emergente", "Visitas"))
+      ).HtmlAttributes(new { style = "height: 600px" })
+        )
+        <br />
+
+        <br />
         <div id="map2" style="width: 100%; height:800px"></div>
+        Visitas Realizadas: <img src="http://maps.google.com/mapfiles/ms/icons/green-dot.png" /> No Visitas <img src="http://maps.google.com/mapfiles/ms/icons/red-dot.png" /> Emergentes<img src="http://maps.google.com/mapfiles/ms/icons/blue-dot.png" />
+        
 
     </div>
 </div>
@@ -90,7 +239,7 @@
             .Columns(columns =>
             {
                 columns.Bound(o => o.visi_id).Hidden();
-                columns.Bound(o => o.reg_emo).Title("Que le parecio el servicio?");
+                columns.Bound(o => o.reg_emo).Title("Animo al terminar la visita");
             })
             .DataSource(dataSource => dataSource
                 .Ajax()
@@ -141,12 +290,15 @@
         if(@marker.reg_status==3){
         icoN.image = "http://maps.google.com/mapfiles/ms/icons/red-dot.png";
         }
+        else if(@marker.reg_status==8){
+            icoN.image = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        }
         else{
             icoN.image = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
         }
 
         var markerOptions = {icon:icoN};
-        var customer ="<h3>@marker.visi_id</h3><br><p>@marker.reg_date</p><br><p>Hora inicio:@marker.reg_ini Hora final: @marker.reg_end</p>";
+        var customer ="ID Visita <h3>@marker.visi_id</h3><br><p>Cliente:@marker.cust_name</p><p>Visitado por:@marker.inst_name</p><p>Fecha:@marker.reg_date</p><br><p>Hora inicio:@marker.reg_ini Hora final: @marker.reg_end</p>";
         var htmlBocadillo =customer;
         mark = CrearMarca(point, htmlBocadillo,markerOptions);
         //////

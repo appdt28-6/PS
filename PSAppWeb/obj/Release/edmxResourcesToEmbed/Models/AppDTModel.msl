@@ -157,5 +157,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="vis_VISITA_REGISTRO_EMERGENTE">
+      <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO_EMERGENTE">
+        <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO_EMERGENTE">
+          <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+          <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+          <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+          <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+          <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+          <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vis_VISITA_REGISTRO_Map">
+      <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_REGISTRO_Map">
+        <MappingFragment StoreEntitySet="vis_VISITA_REGISTRO_Map">
+          <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+          <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+          <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
+          <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
+          <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
+          <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+          <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+          <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+          <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+          <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+          <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+          <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

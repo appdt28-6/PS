@@ -1,4 +1,3 @@
-C:\Users\Miguel Mendez\Documents\Visual Studio 2015\AppDT\PSAppWeb\PSAppWeb\bin\ApplicationInsights.config
 C:\Users\Miguel Mendez\Documents\Visual Studio 2015\AppDT\PSAppWeb\PSAppWeb\bin\PSAppWeb.dll.config
 C:\Users\Miguel Mendez\Documents\Visual Studio 2015\AppDT\PSAppWeb\PSAppWeb\bin\PSAppWeb.dll
 C:\Users\Miguel Mendez\Documents\Visual Studio 2015\AppDT\PSAppWeb\PSAppWeb\bin\PSAppWeb.pdb

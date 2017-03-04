@@ -1,5 +1,18 @@
-﻿
-@(Html.Kendo().Grid<PSAppWeb.Models.INSTRUCTOR>()
+﻿@{
+    ViewBag.Title = "Instructores";
+}
+<!-- or when using the Kendo UI CDN -->
+<div class="banner">
+    <h2>
+        <a href="#">Instructores</a>
+    </h2>
+</div>
+
+<div class="blank">
+    <div class="blank-page">
+        
+
+   @(Html.Kendo().Grid<PSAppWeb.Models.INSTRUCTOR>()
       .Name("grid")
       .Columns(columns =>
       {
@@ -10,7 +23,8 @@
           columns.Bound(c => c.inst_mail).Title("Email");
           columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
       })
-      .ToolBar(toolbar => {
+      .ToolBar(toolbar =>
+      {
           toolbar.Create();
           toolbar.Excel();
           toolbar.Pdf();
@@ -25,5 +39,9 @@
           .Create(create => create.Action("INSTRUCTOR_Create", "Instructor"))
           .Update(update => update.Action("INSTRUCTOR_Update", "Instructor"))
           .Destroy(destroy => destroy.Action("INSTRUCTOR_Destroy", "Instructor"))
-      )
-)
+      ).HtmlAttributes(new { style = "height: 600px" })
+                                )
+                                </div>
+                            </div>
+                        </div>
+                    

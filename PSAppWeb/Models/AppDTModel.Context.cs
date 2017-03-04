@@ -35,5 +35,7 @@ namespace PSAppWeb.Models
         public DbSet<VISITA_ASSIGN> VISITA_ASSIGN { get; set; }
         public DbSet<vis_VISITA_REGISTRO> vis_VISITA_REGISTRO { get; set; }
         public DbSet<CUSTOMER> CUSTOMER { get; set; }
+        public DbSet<vis_VISITA_REGISTRO_EMERGENTE> vis_VISITA_REGISTRO_EMERGENTE { get; set; }
+        public DbSet<vis_VISITA_REGISTRO_Map> vis_VISITA_REGISTRO_Map { get; set; }
     }
 }

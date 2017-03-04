@@ -212,6 +212,12 @@
     <Compile Include="Models\vis_VISITA_REGISTRO.cs">
       <DependentUpon>AppDTModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vis_VISITA_REGISTRO_EMERGENTE.cs">
+      <DependentUpon>AppDTModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vis_VISITA_REGISTRO_Map.cs">
+      <DependentUpon>AppDTModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -294,9 +300,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EntityDeploy Include="Models\AppDTModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AppDTModel.Designer.cs</LastGenOutput>
