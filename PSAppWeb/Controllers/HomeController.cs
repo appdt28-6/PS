@@ -85,7 +85,7 @@ namespace PSAppWeb.Controllers
                         {
                             Session["user_id"] = username;
                             Session["Usua_id"] = result.Usua_Id;
-                            Session["role_id"] = result.Usua_nombre;
+                            Session["role_id"] = result.Usua_Role;
                             //Session["comp_identifier"] = result.Usua_Id.ToString();
                             role_id = result.Usua_nombre;
                         }

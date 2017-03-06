@@ -1,0 +1,17 @@
+﻿@(Html.Kendo().DropDownList()
+          .Name("Usua_Role")
+          .OptionLabel("Seleccione Rol")
+          .DataTextField("Text")
+          .DataValueField("Value")
+          .BindTo(new List<SelectListItem>() {
+              new SelectListItem() {
+                  Text = "Administrador",
+                  Value = "Administrador"
+              },
+              new SelectListItem() {
+                  Text = "Usuario",
+                  Value = "Usuario"
+              }
+          })
+          .HtmlAttributes(new { style = "width: 100%" })
+)

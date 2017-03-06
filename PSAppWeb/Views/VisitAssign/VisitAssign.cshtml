@@ -98,7 +98,8 @@
           columns.Bound(c => c.inst_id).Hidden();
           columns.Bound(c => c.inst_name).Title("Instalador").EditorTemplateName("_installer");
           columns.Bound(c => c.visi_date).Title("Fecha").EditorTemplateName("DateTime");
-          columns.Bound(c => c.visi_op).Title("Prioridad").EditorTemplateName("_Prioridad").ClientTemplate("#if(visi_op==0){#Baja#}else{#Alta#}#"); ;
+          //columns.Bound(c => c.visi_op).Title("Prioridad").EditorTemplateName("_Prioridad").ClientTemplate("#if(visi_op==0){#Baja#}else{#Alta#}#");
+          columns.Bound(c => c.visi_status).Title("Status").ClientTemplate("#if(visi_status==2){#Terminada#}else{#Activa#}#");
           // columns.Bound(c => c.visi_id).ClientTemplate("<input type='button' class='k-button'onclick=\"getDetails('#=visi_id#')\" value='Detalles' />")
           //  .Title("");
           columns.Command(command => { /*command.Edit().Text("Editar");*/ command.Destroy().Text("Eliminar"); }).Width(180);

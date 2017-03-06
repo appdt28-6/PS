@@ -21,6 +21,7 @@ namespace PSAppWeb.Models
         public string Usua_Login { get; set; }
         public string Usua_Password { get; set; }
         public string Usua_Activo { get; set; }
-        public Nullable<System.DateTime> Usua_FechaCreacion { get; set; }
+        public string Usua_FechaCreacion { get; set; }
+        public string Usua_Role { get; set; }
     }
 }

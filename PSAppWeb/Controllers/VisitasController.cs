@@ -75,12 +75,14 @@ namespace PSAppWeb.Controllers
                 reg_id = vISITA_REGISTRO.reg_id,
                 visi_id = vISITA_REGISTRO.visi_id,
                 inst_id = vISITA_REGISTRO.inst_id,
+                inst_name = vISITA_REGISTRO.inst_name,
                 cust_id = vISITA_REGISTRO.cust_id,
+                cust_name = vISITA_REGISTRO.cust_name,
                 reg_date = vISITA_REGISTRO.reg_date,
                 //reg_lat = vISITA_REGISTRO.reg_lat,
                 //reg_lon = vISITA_REGISTRO.reg_lon,
                 reg_ini = vISITA_REGISTRO.reg_ini,
-                novi_reazon = vISITA_REGISTRO.novi_reason
+                novi_reason = vISITA_REGISTRO.novi_reason
             });
 
             return Json(result);

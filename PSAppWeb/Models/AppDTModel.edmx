@@ -53,7 +53,8 @@
           <Property Name="Usua_Login" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Usua_Password" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Usua_Activo" Type="nchar" MaxLength="10" />
-          <Property Name="Usua_FechaCreacion" Type="datetime" />
+          <Property Name="Usua_FechaCreacion" Type="varchar" MaxLength="50" />
+          <Property Name="Usua_Role" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VISITA_ASSIGN">
           <Key>
@@ -326,32 +327,19 @@ FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AppDTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="USUARIO">
-          <Key>
-            <PropertyRef Name="Usua_Id" />
-          </Key>
-          <Property Name="Usua_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Usua_nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Usua_Telefono" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Usua_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Usua_Login" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Usua_Password" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Usua_Activo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Usua_FechaCreacion" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityContainer Name="AppDTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
           <EntitySet Name="NOVISITA" EntityType="AppDTModel.NOVISITA" />
           <EntitySet Name="VISITA_REGISTRO" EntityType="AppDTModel.VISITA_REGISTRO" />
           <EntitySet Name="vis_VISITA_CUSTOMER" EntityType="AppDTModel.vis_VISITA_CUSTOMER" />
           <EntitySet Name="vis_Assigned_Visit" EntityType="AppDTModel.vis_Assigned_Visit" />
-          <EntitySet Name="vis_VISITA_NOTVISIT" EntityType="AppDTModel.vis_VISITA_NOTVISIT" />
           <EntitySet Name="INSTRUCTOR" EntityType="AppDTModel.INSTRUCTOR" />
           <EntitySet Name="VISITA_ASSIGN" EntityType="AppDTModel.VISITA_ASSIGN" />
           <EntitySet Name="vis_VISITA_REGISTRO" EntityType="AppDTModel.vis_VISITA_REGISTRO" />
           <EntitySet Name="CUSTOMER" EntityType="AppDTModel.CUSTOMER" />
           <EntitySet Name="vis_VISITA_REGISTRO_EMERGENTE" EntityType="AppDTModel.vis_VISITA_REGISTRO_EMERGENTE" />
           <EntitySet Name="vis_VISITA_REGISTRO_Map" EntityType="AppDTModel.vis_VISITA_REGISTRO_Map" />
+          <EntitySet Name="USUARIO" EntityType="AppDTModel.USUARIO" />
+          <EntitySet Name="vis_VISITA_NOTVISIT" EntityType="AppDTModel.vis_VISITA_NOTVISIT" />
         </EntityContainer>
         <EntityType Name="NOVISITA">
           <Key>
@@ -423,25 +411,6 @@ FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery
           <Property Name="cust_latitud" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="visi_op" Type="Int32" />
           <Property Name="visi_status" Type="Int32" />
-        </EntityType>
-        <EntityType Name="vis_VISITA_NOTVISIT">
-          <Key>
-            <PropertyRef Name="reg_id" />
-            <PropertyRef Name="visi_id" />
-            <PropertyRef Name="inst_id" />
-            <PropertyRef Name="cust_id" />
-          </Key>
-          <Property Name="reg_id" Type="Int32" Nullable="false" />
-          <Property Name="visi_id" Type="Int32" Nullable="false" />
-          <Property Name="inst_id" Type="Int32" Nullable="false" />
-          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cust_id" Type="Int32" Nullable="false" />
-          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="reg_status" Type="Int32" />
-          <Property Name="novi_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="INSTRUCTOR">
           <Key>
@@ -542,26 +511,45 @@ FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery
           <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="reg_status" Type="Int32" />
         </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="Usua_Id" />
+          </Key>
+          <Property Name="Usua_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Usua_nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Telefono" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Login" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Password" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Activo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Usua_FechaCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Usua_Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vis_VISITA_NOTVISIT">
+          <Key>
+            <PropertyRef Name="reg_id" />
+            <PropertyRef Name="visi_id" />
+            <PropertyRef Name="inst_id" />
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="reg_id" Type="Int32" Nullable="false" />
+          <Property Name="visi_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_id" Type="Int32" Nullable="false" />
+          <Property Name="inst_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_ini" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_end" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="reg_status" Type="Int32" />
+          <Property Name="novi_reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="reg_date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="AppDTModelStoreContainer" CdmEntityContainer="AppDTEntities">
-          <EntitySetMapping Name="USUARIO">
-            <EntityTypeMapping TypeName="AppDTModel.USUARIO">
-              <MappingFragment StoreEntitySet="USUARIO">
-                <ScalarProperty Name="Usua_Id" ColumnName="Usua_Id" />
-                <ScalarProperty Name="Usua_nombre" ColumnName="Usua_nombre" />
-                <ScalarProperty Name="Usua_Telefono" ColumnName="Usua_Telefono" />
-                <ScalarProperty Name="Usua_Email" ColumnName="Usua_Email" />
-                <ScalarProperty Name="Usua_Login" ColumnName="Usua_Login" />
-                <ScalarProperty Name="Usua_Password" ColumnName="Usua_Password" />
-                <ScalarProperty Name="Usua_Activo" ColumnName="Usua_Activo" />
-                <ScalarProperty Name="Usua_FechaCreacion" ColumnName="Usua_FechaCreacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="NOVISITA">
             <EntityTypeMapping TypeName="AppDTModel.NOVISITA">
               <MappingFragment StoreEntitySet="NOVISITA">
@@ -625,23 +613,6 @@ FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery
                 <ScalarProperty Name="inst_name" ColumnName="inst_name" />
                 <ScalarProperty Name="inst_id" ColumnName="inst_id" />
                 <ScalarProperty Name="visi_id" ColumnName="visi_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vis_VISITA_NOTVISIT">
-            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_NOTVISIT">
-              <MappingFragment StoreEntitySet="vis_VISITA_NOTVISIT">
-                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
-                <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
-                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
-                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
-                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
-                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
-                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
-                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
-                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
-                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
-                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -729,6 +700,38 @@ FROM [dbo].[vis_VISITA_REGISTRO_Map] AS [vis_VISITA_REGISTRO_Map]</DefiningQuery
                 <ScalarProperty Name="reg_lon" ColumnName="reg_lon" />
                 <ScalarProperty Name="reg_lat" ColumnName="reg_lat" />
                 <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="cust_name" ColumnName="cust_name" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="inst_name" ColumnName="inst_name" />
+                <ScalarProperty Name="inst_id" ColumnName="inst_id" />
+                <ScalarProperty Name="visi_id" ColumnName="visi_id" />
+                <ScalarProperty Name="reg_id" ColumnName="reg_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="AppDTModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="Usua_Role" ColumnName="Usua_Role" />
+                <ScalarProperty Name="Usua_FechaCreacion" ColumnName="Usua_FechaCreacion" />
+                <ScalarProperty Name="Usua_Activo" ColumnName="Usua_Activo" />
+                <ScalarProperty Name="Usua_Password" ColumnName="Usua_Password" />
+                <ScalarProperty Name="Usua_Login" ColumnName="Usua_Login" />
+                <ScalarProperty Name="Usua_Email" ColumnName="Usua_Email" />
+                <ScalarProperty Name="Usua_Telefono" ColumnName="Usua_Telefono" />
+                <ScalarProperty Name="Usua_nombre" ColumnName="Usua_nombre" />
+                <ScalarProperty Name="Usua_Id" ColumnName="Usua_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vis_VISITA_NOTVISIT">
+            <EntityTypeMapping TypeName="AppDTModel.vis_VISITA_NOTVISIT">
+              <MappingFragment StoreEntitySet="vis_VISITA_NOTVISIT">
+                <ScalarProperty Name="reg_date" ColumnName="reg_date" />
+                <ScalarProperty Name="novi_reason" ColumnName="novi_reason" />
+                <ScalarProperty Name="reg_status" ColumnName="reg_status" />
+                <ScalarProperty Name="reg_end" ColumnName="reg_end" />
+                <ScalarProperty Name="reg_ini" ColumnName="reg_ini" />
                 <ScalarProperty Name="cust_name" ColumnName="cust_name" />
                 <ScalarProperty Name="cust_id" ColumnName="cust_id" />
                 <ScalarProperty Name="inst_name" ColumnName="inst_name" />

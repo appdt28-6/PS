@@ -9,6 +9,8 @@
 <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
 <!--primermapa-->
 
+<!--https://maps.googleapis.com/maps/api/distancematrix/json?origins=19.3664,-99.2116&destinations=20.11090184,-98.74152287&mode=driving&language=es-ES-->
+
 <div class="banner">
     <h2>
         <a href="#">Visitas Relizadas @DateTime.Now</a>
@@ -97,8 +99,8 @@
       .Columns(columns =>
       {
           columns.Bound(c => c.visi_id).Title("ID Visita");
-          columns.Bound(c => c.inst_id).Title("Instalador");
-          columns.Bound(c => c.cust_id).Title("Cliente");
+          columns.Bound(c => c.inst_name).Title("Instalador");
+          columns.Bound(c => c.cust_name).Title("Cliente");
           columns.Bound(c => c.reg_date).Title("Fecha");
           //columns.Bound(c => c.reg_lat).Hidden();
           //columns.Bound(c => c.reg_lon).Hidden();

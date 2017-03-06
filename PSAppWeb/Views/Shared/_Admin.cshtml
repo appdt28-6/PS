@@ -1,0 +1,16 @@
+﻿
+@if (Session["role_id"] != null)
+{
+
+    var user = Session["role_id"].ToString();
+    if (user == "Administrador")
+    {
+        <a class="subnav-text" href="~/Usuarios/Usuarios">Usuarios</a>
+    }
+
+}
+else
+{
+   
+}
+

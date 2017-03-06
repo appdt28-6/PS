@@ -18,7 +18,14 @@ namespace PSAppWeb.Controllers
 
         public ActionResult Usuarios()
         {
-            return View();
+            if (Session["user_id"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("~/Home/Login");
+            }
         }
 
         public ActionResult USUARIO_Read([DataSourceRequest]DataSourceRequest request)
@@ -32,7 +39,8 @@ namespace PSAppWeb.Controllers
                 Usua_Login = uSUARIO.Usua_Login,
                 Usua_Password = uSUARIO.Usua_Password,
                 Usua_Activo = uSUARIO.Usua_Activo,
-                Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion
+                Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion,
+                Usua_Role = uSUARIO.Usua_Role
             });
 
             return Json(result);
@@ -43,6 +51,7 @@ namespace PSAppWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                string fecha = DateTime.Now.ToString("yyyy-MM-dd");
                 var entity = new USUARIO
                 {
                     Usua_Id = uSUARIO.Usua_Id,
@@ -52,7 +61,8 @@ namespace PSAppWeb.Controllers
                     Usua_Login = uSUARIO.Usua_Login,
                     Usua_Password = uSUARIO.Usua_Password,
                     Usua_Activo = uSUARIO.Usua_Activo,
-                    Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion
+                    Usua_FechaCreacion = fecha,
+                    Usua_Role = uSUARIO.Usua_Role
                 };
 
                 db.USUARIO.Add(entity);
@@ -77,7 +87,8 @@ namespace PSAppWeb.Controllers
                     Usua_Login = uSUARIO.Usua_Login,
                     Usua_Password = uSUARIO.Usua_Password,
                     Usua_Activo = uSUARIO.Usua_Activo,
-                    Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion
+                    Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion,
+                    Usua_Role = uSUARIO.Usua_Role
                 };
 
                 db.USUARIO.Attach(entity);
@@ -102,7 +113,8 @@ namespace PSAppWeb.Controllers
                     Usua_Login = uSUARIO.Usua_Login,
                     Usua_Password = uSUARIO.Usua_Password,
                     Usua_Activo = uSUARIO.Usua_Activo,
-                    Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion
+                    Usua_FechaCreacion = uSUARIO.Usua_FechaCreacion,
+                    Usua_Role = uSUARIO.Usua_Role
                 };
 
                 db.USUARIO.Attach(entity);

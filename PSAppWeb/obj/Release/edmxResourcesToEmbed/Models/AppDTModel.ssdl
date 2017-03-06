@@ -48,7 +48,8 @@
     <Property Name="Usua_Login" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Usua_Password" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Usua_Activo" Type="nchar" MaxLength="10" />
-    <Property Name="Usua_FechaCreacion" Type="datetime" />
+    <Property Name="Usua_FechaCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="Usua_Role" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="VISITA_ASSIGN">
     <Key>

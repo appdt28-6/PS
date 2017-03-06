@@ -10,6 +10,7 @@ namespace PSAppWeb.Controllers
     public class EmergencyController : Controller
     {
         // GET: Emergency
+        AppDTEntities db = new AppDTEntities();
         public ActionResult Index()
         {
             int inst_id = Convert.ToInt32(Request.QueryString["inst_id"]);
@@ -20,47 +21,120 @@ namespace PSAppWeb.Controllers
             string hr = Convert.ToString(Request.QueryString["hr"]);
             string fcha = Convert.ToString(Request.QueryString["fcha"]);
             int emo = Convert.ToInt32(Request.QueryString["emo"]);
-
             var succes = "";
-
-            using (AppDTEntities objDataContext = new AppDTEntities())
+            var buscar = db.VISITA_REGISTRO.Where(a=>a.inst_id== inst_id && a.reg_status==8).ToList();
+            if (buscar.Count() == 0)
             {
-                try
+                using (AppDTEntities objDataContext = new AppDTEntities())
                 {
-                    VISITA_REGISTRO vISITA = new VISITA_REGISTRO();
-                    // fields to be insert
-                    vISITA.inst_id = inst_id;
-                    vISITA.reg_lat = lat;
-                    vISITA.reg_lon = lon;
-                    vISITA.cust_id = custid;
-                    vISITA.reg_date = fcha;
-                    vISITA.reg_ini = hr;
-                    vISITA.reg_end = hr;
-                    vISITA.visi_id = 100;
-                    vISITA.reg_status = 8;
-                    vISITA.reg_emo = 0;
-                    objDataContext.VISITA_REGISTRO.Add(vISITA);
+                    try
+                    {
+                        VISITA_REGISTRO vISITA = new VISITA_REGISTRO();
+                        // fields to be insert
+                        vISITA.inst_id = inst_id;
+                        vISITA.reg_lat = lat;
+                        vISITA.reg_lon = lon;
+                        vISITA.cust_id = custid;
+                        vISITA.reg_date = fcha;
+                        vISITA.reg_ini = hr;
+                        vISITA.reg_end = hr;
+                        vISITA.visi_id = 100;
+                        vISITA.reg_status = 8;
+                        vISITA.reg_emo = 0;
+                        objDataContext.VISITA_REGISTRO.Add(vISITA);
+                        objDataContext.SaveChanges();
 
-                    objDataContext.SaveChanges();
+                        succes = "Ok";
+                    }
 
-                    var result = from r in objDataContext.VISITA_ASSIGN where r.visi_id == visitid select r;
-
-                    // Get the first record from the result
-                    VISITA_ASSIGN vISITA_ASSIGN = result.First();
-
-                    // Update the product name
-                    vISITA_ASSIGN.visi_status = 1;
-
-                    objDataContext.SaveChanges();
-
-
-                    succes = "Ok";
-                }
-                catch (Exception e)
-                {
-                    succes = "NoOk";
+                    catch (Exception e)
+                    {
+                        succes = "NoOk";
+                    }
                 }
             }
+            else
+            {
+
+                if (buscar[0].reg_emo == 1)
+                {
+                    using (AppDTEntities objDataContext = new AppDTEntities())
+                    {
+                        try
+                        {
+                            VISITA_REGISTRO vISITA = new VISITA_REGISTRO();
+                            // fields to be insert
+                            vISITA.inst_id = inst_id;
+                            vISITA.reg_lat = lat;
+                            vISITA.reg_lon = lon;
+                            vISITA.cust_id = custid;
+                            vISITA.reg_date = fcha;
+                            vISITA.reg_ini = hr;
+                            vISITA.reg_end = hr;
+                            vISITA.visi_id = 100;
+                            vISITA.reg_status = 8;
+                            vISITA.reg_emo = 0;
+                            objDataContext.VISITA_REGISTRO.Add(vISITA);
+                            objDataContext.SaveChanges();
+
+                            succes = "Ok";
+                        }
+
+                        catch (Exception e)
+                        {
+                            succes = "NoOk";
+                        }
+                    }
+                }
+                else
+                {
+                    if (buscar[0].inst_id != 0)
+                    {
+                        int id = buscar[0].inst_id;
+                        var result2 = from r in db.VISITA_REGISTRO where r.inst_id == id && r.reg_status == 8 select r;
+                        VISITA_REGISTRO vISITA_ASSIGN = result2.First();
+                        vISITA_ASSIGN.reg_end = hr;
+                        vISITA_ASSIGN.reg_emo = 1;
+                        db.SaveChanges();
+                        succes = "Ok";
+                    }
+                    else
+                    {
+                        using (AppDTEntities objDataContext = new AppDTEntities())
+                        {
+                            try
+                            {
+                                VISITA_REGISTRO vISITA = new VISITA_REGISTRO();
+                                // fields to be insert
+                                vISITA.inst_id = inst_id;
+                                vISITA.reg_lat = lat;
+                                vISITA.reg_lon = lon;
+                                vISITA.cust_id = custid;
+                                vISITA.reg_date = fcha;
+                                vISITA.reg_ini = hr;
+                                vISITA.reg_end = hr;
+                                vISITA.visi_id = 100;
+                                vISITA.reg_status = 8;
+                                vISITA.reg_emo = 0;
+                                objDataContext.VISITA_REGISTRO.Add(vISITA);
+                                objDataContext.SaveChanges();
+
+                                succes = "Ok";
+
+                            }
+                            catch (Exception e)
+                            {
+                                succes = "NoOk";
+                            }
+
+                        }
+
+                    }
+                }
+
+            }
+
+
 
             return Json(new { succes }, JsonRequestBehavior.AllowGet);
         }

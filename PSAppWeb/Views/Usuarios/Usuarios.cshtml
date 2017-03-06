@@ -1,5 +1,17 @@
-﻿
-@(Html.Kendo().Grid<PSAppWeb.Models.USUARIO>()
+﻿@{
+    ViewBag.Title = "Instructores";
+}
+<!-- or when using the Kendo UI CDN -->
+<div class="banner">
+    <h2>
+        <a href="#">Instructores</a>
+    </h2>
+</div>
+
+<div class="blank">
+    <div class="blank-page">
+
+        @(Html.Kendo().Grid<PSAppWeb.Models.USUARIO>()
       .Name("grid")
       .Columns(columns =>
       {
@@ -7,14 +19,16 @@
           columns.Bound(c => c.Usua_nombre).Title("Nombre");
           columns.Bound(c => c.Usua_Telefono).Title("Telefono");
           columns.Bound(c => c.Usua_Email).Title("Email");
-          columns.Bound(c => c.Usua_Login).Title("Usario"); ;
+          columns.Bound(c => c.Usua_Login).Title("Usario");
           columns.Bound(c => c.Usua_Password).Title("Contraseña").Format("***");
-          columns.Bound(c => c.Usua_Activo).Title("Activo"); ;
-          columns.Bound(c => c.Usua_FechaCreacion).Title("Fecha de alta"); ;
-          columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+          columns.Bound(c => c.Usua_Role).Title("Role").EditorTemplateName("_Role");
+          columns.Bound(c => c.Usua_Activo).Hidden();
+          columns.Bound(c => c.Usua_FechaCreacion).Hidden();
+          columns.Command(command => { command.Edit().Text("Editar"); command.Destroy().Text("Eliminar"); }).Width(180);
       })
-      .ToolBar(toolbar => {
-          toolbar.Create();
+      .ToolBar(toolbar =>
+      {
+          toolbar.Create().Text("Nuevo");
           toolbar.Excel();
           toolbar.Pdf();
       })
@@ -23,10 +37,15 @@
       .Scrollable()
       .DataSource(dataSource => dataSource
           .Ajax()
-          .Model(model => model.Id(p => p.Usua_Id))
+          .Model(model => {
+              model.Id(p => p.Usua_Id);
+              model.Field(a => a.Usua_Id).Editable(false);
+          })
           .Read(read => read.Action("USUARIO_Read", "Usuarios"))
           .Create(create => create.Action("USUARIO_Create", "Usuarios"))
           .Update(update => update.Action("USUARIO_Update", "Usuarios"))
           .Destroy(destroy => destroy.Action("USUARIO_Destroy", "Usuarios"))
-      )
-)
+      ).HtmlAttributes(new { style = "height: 600px" })
+        )
+    </div>
+</div>
